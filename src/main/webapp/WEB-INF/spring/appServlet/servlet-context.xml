@@ -28,6 +28,13 @@
 	<!-- 웹 소켓 등록 -->
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:handshake-interceptors>
+			<!-- 
+				HttpSession 과 WebSocketSession 연동
+				(interceptor는 http통신에서 request, response를 가로채는 역할을 한다.)
+			 -->
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
 	

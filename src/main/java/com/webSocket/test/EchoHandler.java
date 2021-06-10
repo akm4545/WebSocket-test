@@ -29,7 +29,12 @@ public class EchoHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
-		//모든 유저에게 메세지 출력
+		//모든 유저에게 메세지 출력 응용하면 1:1  채팅 구현 가능할듯 
+		/*
+			핸드쉐이크로 가져온 HttpSession 정보 얻기
+			Map<String, Object> map = session.getAttributes();
+        	String userId = (String)map.get("userId");
+		 * */
 		for(WebSocketSession sess : sessionList) {
 			sess.sendMessage(new TextMessage(message.getPayload()));
 		}
